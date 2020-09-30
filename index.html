@@ -5,13 +5,16 @@
     <title>Snake Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onkeydown="changeDirection(event)">
     <h1>Snake Game</h1>
     
     <div id="container">
         
     </div>
+    <button id="play" onclick="stop()">stop</button>
 
+    <input type="text" name="speed" id="speed">
+    <button onclick="setSpeed()">Set speed</button>
     <script src="script.js"></script>
 </body>
 </html>
