@@ -19,7 +19,7 @@ body {
 #container {
     display: grid;
     grid-template-columns: repeat(50, 15px);
-    border: 3px solid white;
+    border: 3px solid #ffffff3d;
     border-radius: 10px;
     box-shadow: inset 0px 0px 100px 0px #282C34;
     background-color: #ffffff3d;
