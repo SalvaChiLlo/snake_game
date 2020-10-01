@@ -5,7 +5,7 @@ let snake = [{
 }]
 const gridSize = 2500
 let playing = false
-let speed = 100
+let speed = 50
 let playBtn = document.getElementById("play")
 const directions = ["up", "down", "left", "right"]
 let currentDirection = "right"
@@ -25,7 +25,7 @@ function initializeGrid() {
         box.id = i
         box.className = "box"
         box.id = i
-        box.style.border = "1px solid rgba(255, 255, 255, 0.30)"
+        box.style.border = "1px solid rgba(255, 255, 255, 0.10)"
         box.style.margin = "-1px"
         box.style.height = "15px"
         box.style.width = "15px"
