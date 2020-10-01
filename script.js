@@ -2,6 +2,7 @@ let container = document.getElementById("container")
 const sideSize = 25
 const gridSize = sideSize * sideSize
 let playing = false
+let dead = false
 let speed = 80
 let playBtn = document.getElementById("play")
 const directions = ["up", "down", "left", "right"]
@@ -24,6 +25,10 @@ function initializeGrid() {
         playBtn.innerHTML = "START"
     }
 
+    if(dead) {
+        playBtn.innerHTML = "Restart Game"
+    }
+
     for (let i = 0; i < gridSize; i++) {
         let box = document.createElement("div")
 
@@ -43,7 +48,7 @@ function initializeGrid() {
 initializeGrid()
 
 function startGame() {
-    if (playing) {
+    if (playing && !dead) {
         setTimeout(() => {
             snake[0].pos
             if (currentDirection === directions[0]) {
@@ -153,6 +158,18 @@ function stop() {
     } else {
         playBtn.innerHTML = "START"
     }
+
+    if(dead) {
+        snake = [{
+            pos: Math.floor(Math.random()*gridSize) - 1,
+            dir: "right"
+        }]
+        playing = true
+        dead = false
+        document.getElementById(applePos).classList.toggle("apple")
+        applePos = ""
+        startGame()
+    }
 }
 
 function setSpeed() {
@@ -241,6 +258,8 @@ function isKill() {
         if (snake[0].pos === snake[i].pos) {
             playing = false
             alert("Snake has dead")
+            dead = true
+            playBtn.innerHTML = "Restart Game"
         }
     }
 }

@@ -39,3 +39,27 @@ body {
 input::placeholder{
     text-align: center;
 }
+
+.speed {
+    display: none;
+}
+
+#play {
+    background-color: white;
+    stroke: none;
+    border: 0;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-family: 'Varela Round', sans-serif;
+    transition: all 0.5s;
+    cursor: pointer;
+    box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.562);
+}
+
+#play:hover {
+    transform: scale(0.95);
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.562);
+}
