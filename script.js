@@ -1,18 +1,23 @@
 let container = document.getElementById("container")
-let snake = [{
-    pos: 1275,
-    dir: "right"
-}]
-const gridSize = 2500
+const sideSize = 25
+const gridSize = sideSize * sideSize
 let playing = false
-let speed = 50
+let speed = 80
 let playBtn = document.getElementById("play")
 const directions = ["up", "down", "left", "right"]
 let currentDirection = "right"
 let grid = document.getElementsByClassName("box")
 let applePos;
 
+let snake = [{
+    pos: Math.floor(Math.random()*gridSize) - 1,
+    dir: "right"
+}]
+
 function initializeGrid() {
+    let container = document.getElementById("container")
+    let gridTemplateColumns = "repeat(" + sideSize + ", 15px)";
+    container.style.gridTemplateColumns = gridTemplateColumns
     if (playing) {
         playBtn.innerHTML = "STOP"
     } else {
@@ -31,7 +36,6 @@ function initializeGrid() {
         box.style.height = "15px"
         box.style.width = "15px"
         container.appendChild(box)
-
     }
 
 }
@@ -44,35 +48,35 @@ function startGame() {
             snake[0].pos
             if (currentDirection === directions[0]) {
                 // Movimiento vertical hacia abajo
-                snake[0].pos = snake[0].pos - 50
+                snake[0].pos = snake[0].pos - sideSize
 
                 // Movimiento vertical circular hacia abajo
                 if (snake[0].pos <= -1) {
-                    snake[0].pos = snake[0].pos + 2500
+                    snake[0].pos = snake[0].pos + gridSize
                 }
             } else if (currentDirection === directions[1]) {
                 // Movimiento vertical hacia arriba
-                snake[0].pos = snake[0].pos + 50
+                snake[0].pos = snake[0].pos + sideSize
 
                 // Movimiento vertical circular hacia arriba
-                if (snake[0].pos >= 2500) {
-                    snake[0].pos = snake[0].pos - 2500
+                if (snake[0].pos >= gridSize) {
+                    snake[0].pos = snake[0].pos - gridSize
                 }
             } else if (currentDirection === directions[2]) {
                 // Movimiento horizontal izquierda
                 snake[0].pos = --snake[0].pos
 
                 // Movimiento horizontal circular a izquierdas
-                if ((snake[0].pos + 1) % 50 === 0) {
-                    snake[0].pos = snake[0].pos + 50
+                if ((snake[0].pos + 1) % sideSize === 0) {
+                    snake[0].pos = snake[0].pos + sideSize
                 }
             } else if (currentDirection === directions[3]) {
                 // Movimiento horizontal derecha
                 snake[0].pos = ++snake[0].pos
 
                 // Movimiento horizontal circular a derechas
-                if ((snake[0].pos) % 50 === 0) {
-                    snake[0].pos = snake[0].pos - 50
+                if ((snake[0].pos) % sideSize === 0) {
+                    snake[0].pos = snake[0].pos - sideSize
                 }
 
             }
@@ -85,41 +89,40 @@ function startGame() {
 
                 if (current === directions[0]) {
                     // Movimiento vertical hacia arriba
-                    snake[i].pos = snake[i].pos - 50
+                    snake[i].pos = snake[i].pos - sideSize
 
                     // Movimiento vertical circular hacia arriba
                     if (snake[i].pos <= -1) {
-                        snake[i].pos = snake[i].pos + 2500
+                        snake[i].pos = snake[i].pos + gridSize
                     }
                 } else if (current === directions[1]) {
                     // Movimiento vertical hacia abajo
-                    snake[i].pos = snake[i].pos + 50
+                    snake[i].pos = snake[i].pos + sideSize
 
                     // Movimiento vertical circular hacia abajo
-                    if (snake[i].pos >= 2500) {
-                        snake[i].pos = snake[i].pos - 2500
+                    if (snake[i].pos >= gridSize) {
+                        snake[i].pos = snake[i].pos - gridSize
                     }
                 } else if (current === directions[2]) {
                     // Movimiento horizontal izquierda
                     snake[i].pos = --snake[i].pos
 
                     // Movimiento horizontal circular a izquierdas
-                    if ((snake[i].pos + 1) % 50 === 0) {
-                        snake[i].pos = snake[i].pos + 50
+                    if ((snake[i].pos + 1) % sideSize === 0) {
+                        snake[i].pos = snake[i].pos + sideSize
                     }
                 } else if (current === directions[3]) {
                     // Movimiento horizontal derecha
                     snake[i].pos = ++snake[i].pos
 
                     // Movimiento horizontal circular a derechas
-                    if ((snake[i].pos) % 50 === 0) {
-                        snake[i].pos = snake[i].pos - 50
+                    if ((snake[i].pos) % sideSize === 0) {
+                        snake[i].pos = snake[i].pos - sideSize
                     }
                 }
                 snake[i].dir = ant
                 ant = current
             }
-            console.log(snake)
             apple()
             checkApple()
             paintSnake()
@@ -194,43 +197,42 @@ function checkApple() {
 
         if (previous === directions[0]) {
             snake.push({
-                pos: snake[snake.length - 1].pos + 50,
-                dir: snake[snake.length - 1].dir
+                pos: snake[snake.length - 1].pos + sideSize,
+                dir: previous
             })
             // Movimiento vertical circular hacia abajo
-            if (snake[snake.length - 1].pos >= 2500) {
-                snake[snake.length - 1].pos = snake[snake.length - 1].pos - 2500
+            if (snake[snake.length - 1].pos >= gridSize) {
+                snake[snake.length - 1].pos = snake[snake.length - 1].pos - gridSize
             }
         } else if (previous === directions[1]) {
             snake.push({
-                pos: snake[snake.length - 1].pos - 50,
-                dir: snake[snake.length - 1].dir
+                pos: snake[snake.length - 1].pos - sideSize,
+                dir: previous
             })
             // Movimiento vertical circular hacia arriba
-            if (snake[snake.length - 1].pos <= -1) {
-                snake[snake.length - 1].pos = snake[snake.length - 1].pos + 2500
+            if (snake[snake.length - 1].pos < 0) {
+                snake[snake.length - 1].pos = snake[snake.length - 1].pos + gridSize
             }
         } else if (previous === directions[2]) {
             snake.push({
                 pos: snake[snake.length - 1].pos + 1,
-                dir: snake[snake.length - 1].dir
+                dir: previous
             })
             // Movimiento horizontal circular a izquierdas
-            if ((snake[snake.length - 1].pos + 1) % 50 === 0) {
-                snake[snake.length - 1].pos = snake[snake.length - 1].pos + 50
+            if ((snake[snake.length - 1].pos) % sideSize === 0) {
+                snake[snake.length - 1].pos = snake[snake.length - 1].pos + sideSize
             }
         } else if (previous === directions[3]) {
             snake.push({
                 pos: snake[snake.length - 1].pos - 1,
-                dir: snake[snake.length - 1].dir
+                dir: previous
             })
             // Movimiento horizontal circular a derechas
-            if ((snake[snake.length - 1].pos) % 50 === 0) {
-                snake[snake.length - 1].pos = snake[snake.length - 1].pos - 50
+            if ((snake[snake.length - 1].pos) % sideSize === 0) {
+                snake[snake.length - 1].pos = snake[snake.length - 1].pos - sideSize
             }
         }
 
-        console.log(snake)
     }
 }
 
