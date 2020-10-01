@@ -1,20 +1,25 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body onkeydown="changeDirection(event)">
     <h1>Snake Game</h1>
-    
+
     <div id="container">
         <!-- Grid -->
     </div>
-    <button id="play" onclick="stop()">stop</button>
+    <div class="controls">
+        <button id="play" onclick="stop()">stop</button>
 
-    <input type="text" name="speed" id="speed">
-    <button onclick="setSpeed()">Set speed</button>
-    <script src="script.js"></script>
+        <input placeholder="Enter your speed" type="text" name="speed" id="speed">
+        <button onclick="setSpeed()">Set speed</button>
+        <script src="script.js"></script>
+    </div>
 </body>
+
 </html>

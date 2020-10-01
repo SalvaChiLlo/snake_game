@@ -25,7 +25,8 @@ function initializeGrid() {
         box.id = i
         box.className = "box"
         box.id = i
-        box.style.border = "1px solid rgba(255, 255, 255, 0.10)"
+        box.style.border = "1px solid rgba(255, 255, 255, 0.0)"
+        box.style.borderRadius = "100px"
         box.style.margin = "-1px"
         box.style.height = "15px"
         box.style.width = "15px"
