@@ -54,7 +54,7 @@ input::placeholder{
     border-radius: 50px;
     font-weight: bold;
     font-family: 'Varela Round', sans-serif;
-    transition: all 0.5s;
+    transition: all 0.5s; 
     cursor: pointer;
     box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.562);
 }
